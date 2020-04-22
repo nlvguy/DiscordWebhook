@@ -23,7 +23,7 @@ var testEmbed = new EmbedBuilder()
     .WithTimestamp(DateTime.Now)
     .WithImage("https://avatars3.githubusercontent.com/u/1341206")
     .WithThumbnail("https://pbs.twimg.com/profile_images/1212820842712727552/XCuWn8yF_400x400.jpg");
-discord.SendMessageAsync(embeds: new Embed[] { testEmbed.Build() });
+discord.SendMessageAsync(embeds: testEmbed.Build());
 ```
 
 ![Output](https://i.imgur.com/6O3Zs2D.png)
