@@ -23,6 +23,11 @@ namespace DiscordWebhook
             var msg = new Message(username ?? this._username, avatarUrl ?? this._avatarUrl, content, isTTS, embeds);
             return await _client.PostAsync(this._webhookURL, new StringContent(JsonConvert.SerializeObject(msg), Encoding.UTF8, "application/json"));
         }
+        public async Task<HttpResponseMessage> SendMessageAsync(string username = null, string avatarUrl = null, string content = null, bool isTTS = false, Embed embed = null)
+        {
+            var msg = new Message(username ?? this._username, avatarUrl ?? this._avatarUrl, content, isTTS, embed);
+            return await _client.PostAsync(this._webhookURL, new StringContent(JsonConvert.SerializeObject(msg), Encoding.UTF8, "application/json"));
+        }
 
         [JsonObject]
         internal class Message
@@ -45,6 +50,16 @@ namespace DiscordWebhook
                 this.Content = content;
                 this.isTTS = isTTS;
                 Embeds = new List<Embed>(embeds);
+            }
+
+            public Message(string username, string avatarUrl, string content, bool isTTS, Embed embed)
+            {
+                this.Username = username;
+                this.AvatarUrl = avatarUrl;
+                this.Content = content;
+                this.isTTS = isTTS;
+                Embeds = new List<Embed>();
+                Embeds.Add(embed);
             }
         }
     }
